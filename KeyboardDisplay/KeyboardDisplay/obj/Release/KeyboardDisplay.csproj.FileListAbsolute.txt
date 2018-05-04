@@ -1,0 +1,14 @@
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\bin\Release\KeyboardDisplay.exe.config
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\bin\Release\KeyboardDisplay.exe
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\bin\Release\KeyboardDisplay.pdb
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Release\MainWindow.g.cs
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Release\App.g.cs
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Release\KeyboardDisplay_MarkupCompile.cache
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Release\KeyboardDisplay_MarkupCompile.lref
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Release\MainWindow.baml
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Release\KeyboardDisplay.g.resources
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Release\KeyboardDisplay.Properties.Resources.resources
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Release\KeyboardDisplay.csproj.GenerateResource.cache
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Release\KeyboardDisplay.csproj.CoreCompileInputs.cache
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Release\KeyboardDisplay.exe
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Release\KeyboardDisplay.pdb
