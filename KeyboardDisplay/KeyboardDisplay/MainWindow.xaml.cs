@@ -43,28 +43,75 @@ namespace KeyboardDisplay
         {
             if (Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled)
             {
-                Listener.prevstate = Listener.curstate;
-                Listener.curstate = "on";
-                if (Listener.prevstate != Listener.curstate)
+                CapsLock.prevstate = CapsLock.curstate;
+                CapsLock.curstate = "on";
+                if (CapsLock.prevstate != CapsLock.curstate)
                 {
                     label1.Content = "On";
+                    typeLabel.Content = "Caps Lock";
                     ShowChange();
                 }
             }
             else if (!(Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled))
             {
-                Listener.prevstate = Listener.curstate;
-                Listener.curstate = "off";
-                if (Listener.prevstate != Listener.curstate)
+                CapsLock.prevstate = CapsLock.curstate;
+                CapsLock.curstate = "off";
+                if (CapsLock.prevstate != CapsLock.curstate)
                 {
                     label1.Content = "Off";
-                    
+                    typeLabel.Content = "Caps Lock";
                     ShowChange();
                 }
             }
-            //MessageBox.Show("hi");
-        }
+            if (Keyboard.GetKeyStates(Key.NumLock) == KeyStates.Toggled)
+            {
+                NumLock.prevstate = NumLock.curstate;
+                NumLock.curstate = "on";
+                if (NumLock.prevstate != NumLock.curstate)
+                {
+                    label1.Content = "On";
+                    typeLabel.Content = "Num Lock";
+                    ShowChange();
+                }
+            }
+            else if (!(Keyboard.GetKeyStates(Key.NumLock) == KeyStates.Toggled))
+            {
 
+                NumLock.prevstate = NumLock.curstate;
+                NumLock.curstate = "off";
+                if (NumLock.prevstate != NumLock.curstate)
+                {
+                    label1.Content = "Off";
+                    typeLabel.Content = "Num Lock";
+                    ShowChange();
+                }
+            
+            }
+            if (Keyboard.GetKeyStates(Key.Scroll) == KeyStates.Toggled)
+            {
+                ScrLock.prevstate = ScrLock.curstate;
+                ScrLock.curstate = "on";
+                if (ScrLock.prevstate != ScrLock.curstate)
+                {
+                    label1.Content = "On";
+                    typeLabel.Content = "Scroll Lock";
+                    ShowChange();
+                }
+            }
+            else if (!(Keyboard.GetKeyStates(Key.Scroll) == KeyStates.Toggled))
+            {
+
+                ScrLock.prevstate = ScrLock.curstate;
+                ScrLock.curstate = "off";
+                if (ScrLock.prevstate != ScrLock.curstate)
+                {
+                    label1.Content = "Off";
+                    typeLabel.Content = "Scroll Lock";
+                    ShowChange();
+                }
+
+            }
+        }
         private async void ShowChange()
         {
             Storyboard sb = this.FindResource("FadeIn") as Storyboard;

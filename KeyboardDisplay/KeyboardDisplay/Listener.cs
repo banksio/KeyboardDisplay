@@ -8,16 +8,19 @@ using System.Threading.Tasks;
 
 namespace KeyboardDisplay
 {
-    public static class Listener
+    public static class CapsLock
     {
         public static string prevstate = "off";
         public static string curstate = "off";
-
-
-
-
     }
-
-
-
+    public static class NumLock
+    {
+        public static string prevstate = "off";
+        public static string curstate = "off";
+    }
+    public static class ScrLock
+    {
+        public static string prevstate = "off";
+        public static string curstate = "off";
+    }
 }
