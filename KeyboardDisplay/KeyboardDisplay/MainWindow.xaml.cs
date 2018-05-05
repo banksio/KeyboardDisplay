@@ -48,6 +48,7 @@ namespace KeyboardDisplay
                 if (CapsLock.prevstate != CapsLock.curstate)
                 {
                     label1.Content = "On";
+                    typeLabel.Content = "Caps Lock";
                     ShowChange();
                 }
             }
@@ -58,11 +59,10 @@ namespace KeyboardDisplay
                 if (CapsLock.prevstate != CapsLock.curstate)
                 {
                     label1.Content = "Off";
-
+                    typeLabel.Content = "Caps Lock";
                     ShowChange();
                 }
             }
-            //MessageBox.Show("hi");
             if (Keyboard.GetKeyStates(Key.NumLock) == KeyStates.Toggled)
             {
                 NumLock.prevstate = NumLock.curstate;
@@ -70,20 +70,46 @@ namespace KeyboardDisplay
                 if (NumLock.prevstate != NumLock.curstate)
                 {
                     label1.Content = "On";
+                    typeLabel.Content = "Num Lock";
+                    ShowChange();
+                }
+            }
+            else if (!(Keyboard.GetKeyStates(Key.NumLock) == KeyStates.Toggled))
+            {
+
+                NumLock.prevstate = NumLock.curstate;
+                NumLock.curstate = "off";
+                if (NumLock.prevstate != NumLock.curstate)
+                {
+                    label1.Content = "Off";
+                    typeLabel.Content = "Num Lock";
+                    ShowChange();
+                }
+            
+            }
+            if (Keyboard.GetKeyStates(Key.Scroll) == KeyStates.Toggled)
+            {
+                ScrLock.prevstate = ScrLock.curstate;
+                ScrLock.curstate = "on";
+                if (ScrLock.prevstate != ScrLock.curstate)
+                {
+                    label1.Content = "On";
+                    typeLabel.Content = "Scroll Lock";
+                    ShowChange();
+                }
+            }
+            else if (!(Keyboard.GetKeyStates(Key.Scroll) == KeyStates.Toggled))
+            {
+
+                ScrLock.prevstate = ScrLock.curstate;
+                ScrLock.curstate = "off";
+                if (ScrLock.prevstate != ScrLock.curstate)
+                {
+                    label1.Content = "Off";
+                    typeLabel.Content = "Scroll Lock";
                     ShowChange();
                 }
 
-                else if (!(Keyboard.GetKeyStates(Key.NumLock) == KeyStates.Toggled))
-                {
-                    NumLock.prevstate = NumLock.curstate;
-                    NumLock.curstate = "off";
-                    if (NumLock.prevstate != NumLock.curstate)
-                    {
-                        label1.Content = "Off";
-
-                        ShowChange();
-                    }
-                }
             }
         }
         private async void ShowChange()

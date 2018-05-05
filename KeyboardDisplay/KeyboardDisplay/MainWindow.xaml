@@ -14,6 +14,15 @@
         <Storyboard x:Key="FadeOut">
             <DoubleAnimation Duration="00:00:01" Storyboard.TargetProperty="Opacity" To="0" />
         </Storyboard>
+        <!--<Storyboard x:Key="NumLock">
+            <DoubleAnimation Duration="00:00:00:50" Storyboard.TargetProperty="Opacity" To="0" />
+        </Storyboard>
+        <Storyboard x:Key="CapsLock">
+            <DoubleAnimation Duration="00:00:00:50" Storyboard.TargetProperty="Content" T />
+        </Storyboard>
+        <Storyboard x:Key="ScrLock">
+            <DoubleAnimation Duration="00:00:00:50" Storyboard.TargetProperty="Opacity" To="0" />
+        </Storyboard>-->
     </Window.Resources>
 
     <Grid>

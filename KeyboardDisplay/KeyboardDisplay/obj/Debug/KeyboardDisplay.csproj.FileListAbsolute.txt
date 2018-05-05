@@ -16,3 +16,4 @@ N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Debug\Ke
 N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Debug\KeyboardDisplay.csproj.CopyComplete
 N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Debug\KeyboardDisplay.exe
 N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Debug\KeyboardDisplay.pdb
+N:\GitHub\originals\KeyboardDisplay\KeyboardDisplay\KeyboardDisplay\obj\Debug\KeyboardDisplay.csprojResolveAssemblyReference.cache
