@@ -43,9 +43,9 @@ namespace KeyboardDisplay
         {
             if (Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled)
             {
-                Listener.prevstate = Listener.curstate;
-                Listener.curstate = "on";
-                if (Listener.prevstate != Listener.curstate)
+                CapsLock.prevstate = CapsLock.curstate;
+                CapsLock.curstate = "on";
+                if (CapsLock.prevstate != CapsLock.curstate)
                 {
                     label1.Content = "On";
                     ShowChange();
@@ -53,18 +53,39 @@ namespace KeyboardDisplay
             }
             else if (!(Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled))
             {
-                Listener.prevstate = Listener.curstate;
-                Listener.curstate = "off";
-                if (Listener.prevstate != Listener.curstate)
+                CapsLock.prevstate = CapsLock.curstate;
+                CapsLock.curstate = "off";
+                if (CapsLock.prevstate != CapsLock.curstate)
                 {
                     label1.Content = "Off";
-                    
+
                     ShowChange();
                 }
             }
             //MessageBox.Show("hi");
-        }
+            if (Keyboard.GetKeyStates(Key.NumLock) == KeyStates.Toggled)
+            {
+                NumLock.prevstate = NumLock.curstate;
+                NumLock.curstate = "on";
+                if (NumLock.prevstate != NumLock.curstate)
+                {
+                    label1.Content = "On";
+                    ShowChange();
+                }
 
+                else if (!(Keyboard.GetKeyStates(Key.NumLock) == KeyStates.Toggled))
+                {
+                    NumLock.prevstate = NumLock.curstate;
+                    NumLock.curstate = "off";
+                    if (NumLock.prevstate != NumLock.curstate)
+                    {
+                        label1.Content = "Off";
+
+                        ShowChange();
+                    }
+                }
+            }
+        }
         private async void ShowChange()
         {
             Storyboard sb = this.FindResource("FadeIn") as Storyboard;
