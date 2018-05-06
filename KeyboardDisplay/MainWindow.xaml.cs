@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,6 +30,8 @@ namespace KeyboardDisplay
         Storyboard fadeInStoryboard = new Storyboard();
         Storyboard fadeOutStoryboard = new Storyboard();
 
+        CancellationTokenSource cts;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,6 +45,7 @@ namespace KeyboardDisplay
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             checkKeyLocks();
+            Functions.changeDisplay(3);
         }
 
         private void checkKeyLocks()
@@ -118,13 +122,13 @@ namespace KeyboardDisplay
             }
         }
 
-        private async void ShowChange()
+        private async Task ShowChange()
         {
-            Storyboard sb = this.FindResource("FadeIn") as Storyboard;
+            Storyboard sb = FindResource("FadeIn") as Storyboard;
             Storyboard.SetTarget(sb, this);
             sb.Begin();
             await Task.Delay(5000);
-            Storyboard sb2 = this.FindResource("FadeOut") as Storyboard;
+            Storyboard sb2 = FindResource("FadeOut") as Storyboard;
             Storyboard.SetTarget(sb2, this);
             sb2.Begin();
 

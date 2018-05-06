@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="104.651" Width="187.791" AllowsTransparency="True" WindowStyle="None" Topmost="True" Background="Black" Foreground="White" Loaded="Window_Loaded" ShowInTaskbar="False" Opacity="0">
     <Window.Resources>
-        <Storyboard x:Key="FadeIn">
+        <Storyboard x:Key="FadeIn" x:FieldModifier="public">
             <DoubleAnimation Duration="00:00:01" Storyboard.TargetProperty="Opacity" To="0.5" />
         </Storyboard>
         <Storyboard x:Key="FadeOut">
