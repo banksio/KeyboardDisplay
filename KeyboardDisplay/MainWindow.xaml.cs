@@ -41,6 +41,11 @@ namespace KeyboardDisplay
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
+            checkKeyLocks();
+        }
+
+        private void checkKeyLocks()
+        {
             if (Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled)
             {
                 CapsLock.prevstate = CapsLock.curstate;
@@ -85,7 +90,7 @@ namespace KeyboardDisplay
                     typeLabel.Content = "Num Lock";
                     ShowChange();
                 }
-            
+
             }
             if (Keyboard.GetKeyStates(Key.Scroll) == KeyStates.Toggled)
             {
@@ -112,6 +117,7 @@ namespace KeyboardDisplay
 
             }
         }
+
         private async void ShowChange()
         {
             Storyboard sb = this.FindResource("FadeIn") as Storyboard;
