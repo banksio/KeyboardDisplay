@@ -9,3 +9,23 @@
 A small, simple Win32 app to notify when caps lock or num lock are toggled.
 
 This application is currently in alpha. It is not currently recommended to rely on this program, but please feel free to test it and report any bugs found, or new features that may be beneficial!
+## Install
+### Prerequisites
+* Windows 7 or later.
+* Microsoft .NET Framework 4.7.1 (included with Windows 10 v1709 and later).
+### Run
+1. Download the [latest release](https://github.com/banksio/KeyboardDisplay/releases/latest).
+2. Extract the zip folder.
+3. Run the executable! (Installer [coming soon](https://github.com/banksio/KeyboardDisplay/issues/6).)
+## Usage
+Keyboard display will run in the background (soon to [start on logon](https://github.com/banksio/KeyboardDisplay/issues/7)) and should pop up in the lower right hand corner of the screen whenever caps lock, num lock, or scroll lock are toggled.
+A system tray icon will appear to allow graceful exiting from its context menu.
+## Build
+### Prerequisites
+* All above, and;
+* Visual Studio 2012 or later.
+* .NET SDK 4.7.1.
+### Procedure
+1. Clone or download the repository onto your system.
+2. Open the solution in Visual Studio.
+3. Build and run the project `KeyboardDisplay`!
