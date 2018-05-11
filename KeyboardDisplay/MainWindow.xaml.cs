@@ -30,7 +30,6 @@ namespace KeyboardDisplay
         Storyboard fadeInStoryboard = new Storyboard();
         Storyboard fadeOutStoryboard = new Storyboard();
         CancellationTokenSource tokenSource = new CancellationTokenSource();
-        bool visible = false;
 
         public MainWindow()
         {
@@ -43,6 +42,8 @@ namespace KeyboardDisplay
 
             DispatcherTimer fadeDelay = new DispatcherTimer();
             fadeDelay.Interval = new TimeSpan(0,0,5);
+
+            
         }
         private void checkKeyLocks_Tick(object sender, EventArgs e)
         {
@@ -123,21 +124,17 @@ namespace KeyboardDisplay
 
         private void ChangeDisplay()
         {
-            if (visible)
-            {
-                tokenSource.Cancel();
-            }
+            tokenSource.Cancel();
+            tokenSource.Dispose();
+            tokenSource = new CancellationTokenSource();
             ShowChange(tokenSource.Token);
         }
 
         private async void ShowChange(CancellationToken token)
         {
-            if (!visible) {
-                visible = true;
-                Storyboard sb = FindResource("FadeIn") as Storyboard;
-                Storyboard.SetTarget(sb, this);
-                sb.Begin();
-            }
+            Storyboard sb = FindResource("FadeIn") as Storyboard;
+            Storyboard.SetTarget(sb, this);
+            sb.Begin();
             try
             {
                 await Task.Delay(5000, token);
@@ -146,10 +143,13 @@ namespace KeyboardDisplay
             {
                 return;
             }
+            finally
+            {
+                //tokenSource.Dispose();
+            }
             Storyboard sb2 = FindResource("FadeOut") as Storyboard;
             Storyboard.SetTarget(sb2, this);
             sb2.Begin();
-            visible = false;
         }
 
         protected override void OnSourceInitialized(EventArgs e)
