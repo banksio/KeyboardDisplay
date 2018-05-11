@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,100 +29,127 @@ namespace KeyboardDisplay
     {
         Storyboard fadeInStoryboard = new Storyboard();
         Storyboard fadeOutStoryboard = new Storyboard();
+        CancellationTokenSource tokenSource = new CancellationTokenSource();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0,0,0,0,1);
-            dispatcherTimer.Start();
+            DispatcherTimer checkKeyLocks = new DispatcherTimer();
+            checkKeyLocks.Tick += new EventHandler(checkKeyLocks_Tick);
+            checkKeyLocks.Interval = new TimeSpan(0,0,0,0,1);
+            checkKeyLocks.Start();
 
+            DispatcherTimer fadeDelay = new DispatcherTimer();
+            fadeDelay.Interval = new TimeSpan(0,0,5);
+
+            
         }
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void checkKeyLocks_Tick(object sender, EventArgs e)
+        {
+            checkKeyLocks();
+            //Functions.changeDisplay(3);
+        }
+
+        private void checkKeyLocks()
         {
             if (Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled)
             {
-                CapsLock.prevstate = CapsLock.curstate;
-                CapsLock.curstate = "on";
-                if (CapsLock.prevstate != CapsLock.curstate)
+                if (Functions.changeStoredLock("CapsLock",true))
                 {
                     label1.Content = "On";
-                    typeLabel.Content = "Caps Lock";
-                    ShowChange();
+                    typeLabel.Content = Functions.typeLabelText("CapsLock");
+                    ChangeDisplay();
                 }
             }
             else if (!(Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled))
             {
-                CapsLock.prevstate = CapsLock.curstate;
-                CapsLock.curstate = "off";
-                if (CapsLock.prevstate != CapsLock.curstate)
+                if (Functions.changeStoredLock("CapsLock", false))
                 {
                     label1.Content = "Off";
-                    typeLabel.Content = "Caps Lock";
-                    ShowChange();
+                    typeLabel.Content = Functions.typeLabelText("CapsLock");
+                    ChangeDisplay();
                 }
             }
             if (Keyboard.GetKeyStates(Key.NumLock) == KeyStates.Toggled)
             {
-                NumLock.prevstate = NumLock.curstate;
-                NumLock.curstate = "on";
-                if (NumLock.prevstate != NumLock.curstate)
+                //NumLock.prevstate = NumLock.curstate;
+                //NumLock.curstate = "on";
+                if (Functions.changeStoredLock("NumLock", true))
                 {
                     label1.Content = "On";
-                    typeLabel.Content = "Num Lock";
-                    ShowChange();
+                    typeLabel.Content = Functions.typeLabelText("NumLock");
+                    ChangeDisplay();
                 }
             }
             else if (!(Keyboard.GetKeyStates(Key.NumLock) == KeyStates.Toggled))
             {
 
-                NumLock.prevstate = NumLock.curstate;
-                NumLock.curstate = "off";
-                if (NumLock.prevstate != NumLock.curstate)
+                //NumLock.prevstate = NumLock.curstate;
+                //NumLock.curstate = "off";
+                if (Functions.changeStoredLock("NumLock", false))
                 {
                     label1.Content = "Off";
-                    typeLabel.Content = "Num Lock";
-                    ShowChange();
+                    typeLabel.Content = Functions.typeLabelText("NumLock");
+                    ChangeDisplay();
                 }
-            
+
             }
             if (Keyboard.GetKeyStates(Key.Scroll) == KeyStates.Toggled)
             {
-                ScrLock.prevstate = ScrLock.curstate;
-                ScrLock.curstate = "on";
-                if (ScrLock.prevstate != ScrLock.curstate)
+                //ScrLock.prevstate = ScrLock.curstate;
+                //ScrLock.curstate = "on";
+                if (Functions.changeStoredLock("ScrLock", true))
                 {
                     label1.Content = "On";
-                    typeLabel.Content = "Scroll Lock";
-                    ShowChange();
+                    typeLabel.Content = Functions.typeLabelText("ScrLock");
+                    ChangeDisplay();
                 }
             }
             else if (!(Keyboard.GetKeyStates(Key.Scroll) == KeyStates.Toggled))
             {
 
-                ScrLock.prevstate = ScrLock.curstate;
-                ScrLock.curstate = "off";
-                if (ScrLock.prevstate != ScrLock.curstate)
+                //ScrLock.prevstate = ScrLock.curstate;
+                //ScrLock.curstate = "off";
+                if (Functions.changeStoredLock("ScrLock", false))
                 {
                     label1.Content = "Off";
-                    typeLabel.Content = "Scroll Lock";
-                    ShowChange();
+                    typeLabel.Content = Functions.typeLabelText("ScrLock");
+                    ChangeDisplay();
+                    
                 }
 
             }
         }
-        private async void ShowChange()
+
+        private void ChangeDisplay()
         {
-            Storyboard sb = this.FindResource("FadeIn") as Storyboard;
+            tokenSource.Cancel();
+            tokenSource.Dispose();
+            tokenSource = new CancellationTokenSource();
+            ShowChange(tokenSource.Token);
+        }
+
+        private async void ShowChange(CancellationToken token)
+        {
+            Storyboard sb = FindResource("FadeIn") as Storyboard;
             Storyboard.SetTarget(sb, this);
             sb.Begin();
-            await Task.Delay(5000);
-            Storyboard sb2 = this.FindResource("FadeOut") as Storyboard;
+            try
+            {
+                await Task.Delay(5000, token);
+            }
+            catch (TaskCanceledException)
+            {
+                return;
+            }
+            finally
+            {
+                //tokenSource.Dispose();
+            }
+            Storyboard sb2 = FindResource("FadeOut") as Storyboard;
             Storyboard.SetTarget(sb2, this);
             sb2.Begin();
-
         }
 
         protected override void OnSourceInitialized(EventArgs e)
