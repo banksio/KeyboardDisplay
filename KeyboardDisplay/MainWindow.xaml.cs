@@ -1,6 +1,7 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -27,33 +28,35 @@ namespace KeyboardDisplay
 
     public partial class MainWindow : Window
     {
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true, CallingConvention = CallingConvention.Winapi)]
+        public static extern short GetAsyncKeyState(int keyCode);
+
         Storyboard fadeInStoryboard = new Storyboard();
         Storyboard fadeOutStoryboard = new Storyboard();
         CancellationTokenSource tokenSource = new CancellationTokenSource();
 
+        private KeyboardHook _hook;
+        
         public MainWindow()
         {
             InitializeComponent();
 
-            DispatcherTimer checkKeyLocks = new DispatcherTimer();
-            checkKeyLocks.Tick += new EventHandler(checkKeyLocks_Tick);
-            checkKeyLocks.Interval = new TimeSpan(0,0,0,0,1);
-            checkKeyLocks.Start();
-
             DispatcherTimer fadeDelay = new DispatcherTimer();
             fadeDelay.Interval = new TimeSpan(0,0,5);
 
-            
+            _hook = new KeyboardHook();
+            _hook.KeyUp += new KeyboardHook.HookEventHandler(OnHookKeyUp);
+
         }
-        private void checkKeyLocks_Tick(object sender, EventArgs e)
+
+        void OnHookKeyUp(object sender, HookEventArgs e)
         {
             checkKeyLocks();
-            //Functions.changeDisplay(3);
         }
 
         private void checkKeyLocks()
         {
-            if (Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled)
+            if (Keyboard.IsKeyToggled(Key.CapsLock))
             {
                 if (Functions.changeStoredLock("CapsLock",true))
                 {
@@ -62,7 +65,7 @@ namespace KeyboardDisplay
                     ChangeDisplay();
                 }
             }
-            else if (!(Keyboard.GetKeyStates(Key.CapsLock) == KeyStates.Toggled))
+            else if (!(Keyboard.IsKeyToggled(Key.CapsLock)))
             {
                 if (Functions.changeStoredLock("CapsLock", false))
                 {
@@ -71,7 +74,7 @@ namespace KeyboardDisplay
                     ChangeDisplay();
                 }
             }
-            if (Keyboard.GetKeyStates(Key.NumLock) == KeyStates.Toggled)
+            if (Keyboard.IsKeyToggled(Key.NumLock))
             {
                 //NumLock.prevstate = NumLock.curstate;
                 //NumLock.curstate = "on";
@@ -82,7 +85,7 @@ namespace KeyboardDisplay
                     ChangeDisplay();
                 }
             }
-            else if (!(Keyboard.GetKeyStates(Key.NumLock) == KeyStates.Toggled))
+            else if (!(Keyboard.IsKeyToggled(Key.NumLock)))
             {
 
                 //NumLock.prevstate = NumLock.curstate;
@@ -95,7 +98,7 @@ namespace KeyboardDisplay
                 }
 
             }
-            if (Keyboard.GetKeyStates(Key.Scroll) == KeyStates.Toggled)
+            if (Keyboard.IsKeyToggled(Key.Scroll))
             {
                 //ScrLock.prevstate = ScrLock.curstate;
                 //ScrLock.curstate = "on";
@@ -106,7 +109,7 @@ namespace KeyboardDisplay
                     ChangeDisplay();
                 }
             }
-            else if (!(Keyboard.GetKeyStates(Key.Scroll) == KeyStates.Toggled))
+            else if (!(Keyboard.IsKeyToggled(Key.Scroll)))
             {
 
                 //ScrLock.prevstate = ScrLock.curstate;
@@ -132,6 +135,7 @@ namespace KeyboardDisplay
 
         private async void ShowChange(CancellationToken token)
         {
+            //this.Visibility = Visibility.Visible;
             Storyboard sb = FindResource("FadeIn") as Storyboard;
             Storyboard.SetTarget(sb, this);
             sb.Begin();
@@ -150,6 +154,7 @@ namespace KeyboardDisplay
             Storyboard sb2 = FindResource("FadeOut") as Storyboard;
             Storyboard.SetTarget(sb2, this);
             sb2.Begin();
+            //this.Visibility = Visibility.Hidden;
         }
 
         protected override void OnSourceInitialized(EventArgs e)
@@ -189,6 +194,7 @@ namespace KeyboardDisplay
             System.Windows.Application.Current.Shutdown();
         }
     }
+
 
 }
 

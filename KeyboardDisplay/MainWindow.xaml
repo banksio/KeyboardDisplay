@@ -6,13 +6,19 @@
         xmlns:tb="http://www.hardcodet.net/taskbar" 
         xmlns:local="clr-namespace:KeyboardDisplay"
         mc:Ignorable="d"
-        Title="MainWindow" Height="104.651" Width="187.791" AllowsTransparency="True" WindowStyle="None" Topmost="True" Background="Black" Foreground="White" Loaded="Window_Loaded" ShowInTaskbar="False" Opacity="0">
+        Title="Keyboard Display" Height="104.651" Width="187.791" AllowsTransparency="True" WindowStyle="None" Topmost="True" Background="Black" Foreground="White" Loaded="Window_Loaded" ShowInTaskbar="False" Opacity="0">
     <Window.Resources>
         <Storyboard x:Key="FadeIn">
+            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
             <DoubleAnimation Duration="00:00:01" Storyboard.TargetProperty="Opacity" To="0.5" />
         </Storyboard>
         <Storyboard x:Key="FadeOut">
             <DoubleAnimation Duration="00:00:01" Storyboard.TargetProperty="Opacity" To="0" />
+            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:01" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         <!--<Storyboard x:Key="NumLock">
             <DoubleAnimation Duration="00:00:00:50" Storyboard.TargetProperty="Opacity" To="0" />
