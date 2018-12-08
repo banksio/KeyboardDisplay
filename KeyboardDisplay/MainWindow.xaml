@@ -6,7 +6,7 @@
         xmlns:tb="http://www.hardcodet.net/taskbar" 
         xmlns:local="clr-namespace:KeyboardDisplay"
         mc:Ignorable="d"
-        Title="Keyboard Display" Height="104.651" Width="187.791" AllowsTransparency="True" WindowStyle="None" Topmost="True" Background="Black" Foreground="White" Loaded="Window_Loaded" ShowInTaskbar="False" Opacity="0">
+        Title="Keyboard Display" Height="104.651" Width="187.791" AllowsTransparency="True" WindowStyle="None" Topmost="True" Background="Black" Foreground="White" Loaded="Window_Loaded" ShowInTaskbar="False" Opacity="0" Icon="Resources/KBDDisp.ico">
     <Window.Resources>
         <Storyboard x:Key="FadeIn">
             <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Visibility)">
