@@ -23,7 +23,7 @@ Keyboard display will run in the background (soon to [start on logon](https://gi
 A system tray icon will appear to allow graceful exiting from its context menu.
 ## Build
 ### Prerequisites
-* All above, and;
+All above, and;
 * Visual Studio 2012 or later.
 * .NET SDK 4.7.2.
 ### Procedure
