@@ -28,6 +28,8 @@ namespace KeyboardDisplay
 
     public partial class MainWindow : Window
     {
+        public bool startUp = true;
+
         //Disable window focus
         private const int GWL_EXSTYLE = -20;
         private const int WS_EX_NOACTIVATE = 0x08000000;
@@ -134,6 +136,7 @@ namespace KeyboardDisplay
 
         private void ChangeDisplay()
         {
+            if (startUp) { return; }
             tokenSource.Cancel();
             tokenSource.Dispose();
             tokenSource = new CancellationTokenSource();
@@ -142,7 +145,6 @@ namespace KeyboardDisplay
 
         private async void ShowChange(CancellationToken token)
         {
-            //this.Visibility = Visibility.Visible;
             Storyboard sb = FindResource("FadeIn") as Storyboard;
             Storyboard.SetTarget(sb, this);
             sb.Begin();
@@ -161,7 +163,6 @@ namespace KeyboardDisplay
             Storyboard sb2 = FindResource("FadeOut") as Storyboard;
             Storyboard.SetTarget(sb2, this);
             sb2.Begin();
-            //this.Visibility = Visibility.Hidden;
         }
 
         protected override void OnSourceInitialized(EventArgs e)
@@ -196,9 +197,11 @@ namespace KeyboardDisplay
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            checkKeyLocks();
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
             this.Left = desktopWorkingArea.Right - this.Width;
             this.Top = desktopWorkingArea.Bottom - this.Height;
+            startUp = false;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
