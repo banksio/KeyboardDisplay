@@ -12,7 +12,7 @@ A small, simple Windows app to notify when caps lock, num lock or scroll lock ar
 This application is currently in alpha: It is not recommended to rely on this program right now, but please feel free to test it and report any bugs found, or new features that may be beneficial!
 ## Install
 ### Prerequisites
-* Windows 7 SP1, Windows 8.1, or later.
+* Windows 7 SP1, Windows 8.1, or Windows 10.
 * Microsoft .NET Framework 4.7.2 (included with Windows 10 v1803 and later).
 ### Run
 1. Download the [latest release](https://github.com/banksio/KeyboardDisplay/releases/latest).
