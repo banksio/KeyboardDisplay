@@ -1,0 +1,16 @@
+﻿<Window x:Class="KeyboardDisplay.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KeyboardDisplay"
+        mc:Ignorable="d"
+        Title="Keyboard Display Settings" Icon="Resources/KBDDisp.ico" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Width="300">
+
+    <StackPanel Margin="10,0,10,10" VerticalAlignment="Top">
+        <Label Padding="0,0,0,20" Content="Settings" FontFamily="Segoe UI Light" FontSize="48" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <CheckBox x:Name="startupCheckbox" Content="Start at sign in (current user)" HorizontalAlignment="Left" VerticalAlignment="Top" Click="StartupCheckbox_Click"/>
+        <CheckBox x:Name="startupCheckbox_AllUsers" Content="Start at sign in (all users)" HorizontalAlignment="Left" VerticalAlignment="Top" Click="StartupCheckbox_AllUsers_Click" IsEnabled="False"/>
+        <Button Margin="10" Content="OK" Width="73" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="21" Click="Button_Click"/>
+    </StackPanel>
+</Window>
