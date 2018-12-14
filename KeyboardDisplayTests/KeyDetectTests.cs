@@ -12,7 +12,7 @@ namespace KeyboardDisplay.Tests
             string type = "CapsLock";
             string expected = "Caps Lock";
 
-            string actual = Functions.typeLabelText(type);
+            string actual = Functions.TypeLabelText(type);
 
             Assert.AreEqual(expected, actual);
         }
@@ -23,7 +23,7 @@ namespace KeyboardDisplay.Tests
             string type = "NumLock";
             string expected = "Num Lock";
 
-            string actual = Functions.typeLabelText(type);
+            string actual = Functions.TypeLabelText(type);
 
             Assert.AreEqual(expected, actual);
         }
@@ -47,10 +47,10 @@ namespace KeyboardDisplay.Tests
             }
             if (CapsLock.prevstate != CapsLock.curstate)
             {
-                Assert.IsTrue(Functions.changeStoredLock(type, previousLock));
+                Assert.IsTrue(Functions.ChangeStoredLock(type, previousLock));
             } else
             {
-                Assert.IsFalse(Functions.changeStoredLock(type, previousLock));
+                Assert.IsFalse(Functions.ChangeStoredLock(type, previousLock));
             }
         }
 
@@ -69,11 +69,11 @@ namespace KeyboardDisplay.Tests
             }
             if (CapsLock.prevstate != CapsLock.curstate)
             {
-                Assert.IsTrue(Functions.changeStoredLock(type, previousLock));
+                Assert.IsTrue(Functions.ChangeStoredLock(type, previousLock));
             }
             else
             {
-                Assert.IsFalse(Functions.changeStoredLock(type, previousLock));
+                Assert.IsFalse(Functions.ChangeStoredLock(type, previousLock));
             }
         }
     }

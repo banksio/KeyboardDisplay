@@ -9,7 +9,8 @@
     <Grid>
         <StackPanel>
             <Label Content="Settings" FontFamily="Segoe UI Light" FontSize="48" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <CheckBox x:Name="startupCheckbox" Content="Start at sign in" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+            <CheckBox x:Name="startupCheckbox" Content="Start at sign in (current user)" HorizontalAlignment="Left" VerticalAlignment="Top" Click="StartupCheckbox_Click"/>
+            <CheckBox x:Name="startupCheckbox_AllUsers" Content="Start at sign in (all users)" HorizontalAlignment="Left" VerticalAlignment="Top" Click="StartupCheckbox_AllUsers_Click"/>
         </StackPanel>
 
     </Grid>

@@ -67,19 +67,19 @@ namespace KeyboardDisplay
         {
             if (Keyboard.IsKeyToggled(Key.CapsLock))
             {
-                if (Functions.changeStoredLock("CapsLock",true))
+                if (Functions.ChangeStoredLock("CapsLock",true))
                 {
                     label1.Content = "On";
-                    typeLabel.Content = Functions.typeLabelText("CapsLock");
+                    typeLabel.Content = Functions.TypeLabelText("CapsLock");
                     ChangeDisplay();
                 }
             }
             else if (!(Keyboard.IsKeyToggled(Key.CapsLock)))
             {
-                if (Functions.changeStoredLock("CapsLock", false))
+                if (Functions.ChangeStoredLock("CapsLock", false))
                 {
                     label1.Content = "Off";
-                    typeLabel.Content = Functions.typeLabelText("CapsLock");
+                    typeLabel.Content = Functions.TypeLabelText("CapsLock");
                     ChangeDisplay();
                 }
             }
@@ -87,10 +87,10 @@ namespace KeyboardDisplay
             {
                 //NumLock.prevstate = NumLock.curstate;
                 //NumLock.curstate = "on";
-                if (Functions.changeStoredLock("NumLock", true))
+                if (Functions.ChangeStoredLock("NumLock", true))
                 {
                     label1.Content = "On";
-                    typeLabel.Content = Functions.typeLabelText("NumLock");
+                    typeLabel.Content = Functions.TypeLabelText("NumLock");
                     ChangeDisplay();
                 }
             }
@@ -99,10 +99,10 @@ namespace KeyboardDisplay
 
                 //NumLock.prevstate = NumLock.curstate;
                 //NumLock.curstate = "off";
-                if (Functions.changeStoredLock("NumLock", false))
+                if (Functions.ChangeStoredLock("NumLock", false))
                 {
                     label1.Content = "Off";
-                    typeLabel.Content = Functions.typeLabelText("NumLock");
+                    typeLabel.Content = Functions.TypeLabelText("NumLock");
                     ChangeDisplay();
                 }
 
@@ -111,10 +111,10 @@ namespace KeyboardDisplay
             {
                 //ScrLock.prevstate = ScrLock.curstate;
                 //ScrLock.curstate = "on";
-                if (Functions.changeStoredLock("ScrLock", true))
+                if (Functions.ChangeStoredLock("ScrLock", true))
                 {
                     label1.Content = "On";
-                    typeLabel.Content = Functions.typeLabelText("ScrLock");
+                    typeLabel.Content = Functions.TypeLabelText("ScrLock");
                     ChangeDisplay();
                 }
             }
@@ -123,10 +123,10 @@ namespace KeyboardDisplay
 
                 //ScrLock.prevstate = ScrLock.curstate;
                 //ScrLock.curstate = "off";
-                if (Functions.changeStoredLock("ScrLock", false))
+                if (Functions.ChangeStoredLock("ScrLock", false))
                 {
                     label1.Content = "Off";
-                    typeLabel.Content = Functions.typeLabelText("ScrLock");
+                    typeLabel.Content = Functions.TypeLabelText("ScrLock");
                     ChangeDisplay();
                     
                 }
@@ -207,6 +207,12 @@ namespace KeyboardDisplay
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 settings = new Window1();
+            settings.Show();
         }
     }
 

@@ -23,13 +23,36 @@ namespace KeyboardDisplay
         public Window1()
         {
             InitializeComponent();
+
+            //set checkbox
+            startupCheckbox.IsChecked = Functions.GetStartupRegistryKeyStatus("currentUser");
+            startupCheckbox_AllUsers.IsChecked = Functions.GetStartupRegistryKeyStatus("localMachine");
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void StartupCheckbox_Click(object sender, RoutedEventArgs e)
         {
-            
             //logic for logon startup here
+            if ((bool)startupCheckbox.IsChecked)
+            {
+                Functions.SetStartupRegistryKeyStatus("currentUser");
+            }
+            else
+            {
+                Functions.SetStartupRegistryKeyStatus("currentUser", true);
+            }
+        }
 
+        private void StartupCheckbox_AllUsers_Click(object sender, RoutedEventArgs e)
+        {
+            //logic for logon startup here
+            if ((bool)startupCheckbox.IsChecked)
+            {
+                Functions.SetStartupRegistryKeyStatus("localMachine");
+            }
+            else
+            {
+                Functions.SetStartupRegistryKeyStatus("localMachine", true);
+            }
         }
     }
 }
