@@ -31,14 +31,13 @@
         </Storyboard>-->
     </Window.Resources>
 
-    <Grid Visibility="Hidden">
+    <Grid>
         <Label x:Name="label1" Content="Ready" HorizontalAlignment="Left" Margin="10,20.807,0,0" VerticalAlignment="Top" Foreground="White" FontSize="48" FontFamily="Segoe UI Semilight" Width="165.094" VerticalContentAlignment="Bottom"/>
         <Label x:Name="typeLabel" Content="Caps Lock" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Height="59.24" Width="91.542" FontSize="16" Margin="86.249,10,0,0" HorizontalContentAlignment="Right"/>
         <tb:TaskbarIcon ToolTipText="Keyboard Display is running." IconSource="Resources\KBDDisp.ico" >
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Settings" Click="SettingsMenuItem_Click"/>
-                    <MenuItem></MenuItem>
                     <MenuItem Header="Exit" Click="MenuItem_Click"/>
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
