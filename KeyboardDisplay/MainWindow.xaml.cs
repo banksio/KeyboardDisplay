@@ -160,9 +160,12 @@ namespace KeyboardDisplay
             {
                 //tokenSource.Dispose();
             }
-            Storyboard sb2 = FindResource("FadeOut") as Storyboard;
-            Storyboard.SetTarget(sb2, this);
-            sb2.Begin();
+            if (Properties.Settings.Default.alwaysOn == false)
+            {
+                Storyboard sb2 = FindResource("FadeOut") as Storyboard;
+                Storyboard.SetTarget(sb2, this);
+                sb2.Begin();
+            }
         }
 
         protected override void OnSourceInitialized(EventArgs e)

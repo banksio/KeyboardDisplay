@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyboardDisplay"
         mc:Ignorable="d"
-        Title="Keyboard Display Settings" Icon="Resources/KBDDisp.ico" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Width="300">
+        Title="Keyboard Display Settings" Icon="Resources/KBDDisp.ico" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Width="424.413" Loaded="Window_Loaded">
 
     <StackPanel Margin="10,0,10,10" VerticalAlignment="Top">
         <Label Padding="0,0,0,20" Content="Settings" FontFamily="Segoe UI Light" FontSize="48" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <CheckBox x:Name="startupCheckbox" Content="Start at sign in (current user)" HorizontalAlignment="Left" VerticalAlignment="Top" Click="StartupCheckbox_Click"/>
         <CheckBox x:Name="startupCheckbox_AllUsers" Content="Start at sign in (all users)" HorizontalAlignment="Left" VerticalAlignment="Top" Click="StartupCheckbox_AllUsers_Click" IsEnabled="False"/>
+        <CheckBox x:Name="alwaysOnCheckbox" Content="Always show lock status (active on next lock change)" HorizontalAlignment="Left" VerticalAlignment="Top" Click="alwaysOnCheckbox_Click" Margin="0,15,0,0"/>
         <Button Margin="10" Content="OK" Width="73" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="21" Click="Button_Click"/>
     </StackPanel>
 </Window>
