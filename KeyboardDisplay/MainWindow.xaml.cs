@@ -143,7 +143,7 @@ namespace KeyboardDisplay
             ShowChange(tokenSource.Token);
         }
 
-        private async void ShowChange(CancellationToken token, bool alwaysOn = true)
+        private async void ShowChange(CancellationToken token)
         {
             Storyboard sb = FindResource("FadeIn") as Storyboard;
             Storyboard.SetTarget(sb, this);
@@ -160,7 +160,7 @@ namespace KeyboardDisplay
             {
                 //tokenSource.Dispose();
             }
-            if (alwaysOn == false)
+            if (Properties.Settings.Default.alwaysOn == false)
             {
                 Storyboard sb2 = FindResource("FadeOut") as Storyboard;
                 Storyboard.SetTarget(sb2, this);

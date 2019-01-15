@@ -22,5 +22,17 @@ namespace KeyboardDisplay.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool alwaysOn {
+            get {
+                return ((bool)(this["alwaysOn"]));
+            }
+            set {
+                this["alwaysOn"] = value;
+            }
+        }
     }
 }
