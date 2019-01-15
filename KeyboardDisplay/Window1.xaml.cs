@@ -20,6 +20,7 @@ namespace KeyboardDisplay
     /// </summary>
     public partial class Window1 : Window
     {
+        
         public Window1()
         {
             InitializeComponent();
@@ -58,6 +59,11 @@ namespace KeyboardDisplay
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void alwaysOnCheckbox_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
