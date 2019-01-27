@@ -34,5 +34,17 @@ namespace KeyboardDisplay.Properties {
                 this["alwaysOn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("b")]
+        public string updateChannel {
+            get {
+                return ((string)(this["updateChannel"]));
+            }
+            set {
+                this["updateChannel"] = value;
+            }
+        }
     }
 }

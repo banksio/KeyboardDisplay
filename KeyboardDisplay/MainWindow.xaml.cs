@@ -2,15 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -30,6 +34,8 @@ namespace KeyboardDisplay
     {
         public bool startUp = true;
 
+        private NotifyIcon ni;
+
         //Disable window focus
         private const int GWL_EXSTYLE = -20;
         private const int WS_EX_NOACTIVATE = 0x08000000;
@@ -45,10 +51,15 @@ namespace KeyboardDisplay
 
         //for detecting keypresses
         private KeyboardHook _hook;
-        
+
+        public NotifyIcon Ni { get => ni; set => ni = value; }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            CreateNotifyIcon();
+            ni.BalloonTipClicked += new EventHandler(GetNewUpdate);
 
             DispatcherTimer fadeDelay = new DispatcherTimer();
             fadeDelay.Interval = new TimeSpan(0,0,5);
@@ -56,6 +67,16 @@ namespace KeyboardDisplay
             _hook = new KeyboardHook();
             _hook.KeyUp += new KeyboardHook.HookEventHandler(OnHookKeyUp);
 
+            //check for updates last, it is least important
+            GetUpdateInfo();
+        }
+               
+        public void CreateNotifyIcon()
+        {
+            Ni = new System.Windows.Forms.NotifyIcon();
+            Ni.Icon = System.Drawing.Icon.ExtractAssociatedIcon(
+                         System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
+            Ni.Visible = true;
         }
 
         void OnHookKeyUp(object sender, HookEventArgs e)
@@ -217,6 +238,72 @@ namespace KeyboardDisplay
             Window1 settings = new Window1();
             settings.Show();
         }
+
+        private void GetUpdateInfo()
+        {
+            // Set URL.
+            var url = "https://raw.githubusercontent.com/banksio/KeyboardDisplay/master/versions.txt";
+
+            var total = 0;
+            // GetURLContents returns the contents of url as a byte array.
+            byte[] urlContents = GetURLContents(url);
+
+            ProcessURLResponse(url, urlContents);
+
+
+            // Update the total.
+            total += urlContents.Length;
+
+            // Display the total count for all of the web addresses.
+            //resultsTextBox.Text += $"\r\n\r\nTotal bytes returned:  {total}\r\n";
+        }
+
+        private byte[] GetURLContents(string url)
+        {
+            // The downloaded resource ends up in the variable named content.
+            var content = new MemoryStream();
+
+            // Initialize an HttpWebRequest for the current URL.
+            var webReq = (HttpWebRequest)WebRequest.Create(url);
+
+            // Send the request to the Internet resource and wait for
+            // the response.
+            // Note: you can't use HttpWebRequest.GetResponse in a Windows Store app.
+            using (WebResponse response = webReq.GetResponse())
+            {
+                // Get the data stream that is associated with the specified URL.
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    // Read the bytes in responseStream and copy them to content.
+                    responseStream.CopyTo(content);
+                }
+            }
+
+            // Return the result as a byte array.
+            return content.ToArray();
+        }
+
+        private void ProcessURLResponse(string url, byte[] content)
+        {
+            // Display the length of each website. The string format
+            // is designed to be used with a monospaced font, such as
+            // Lucida Console or Global Monospace.
+            var bytes = content.Length;
+            var contentString = Regex.Replace(Encoding.UTF8.GetString(content), @"\t|\n|\r", ""); 
+            
+
+            if (float.Parse(contentString) > float.Parse(Properties.Resources.version))
+            {
+                //show update notification
+                Ni.ShowBalloonTip(1, "Keyboard Display Update", "Version "+contentString+" is available. Tap or click here to install it.", ToolTipIcon.Info);
+            }
+        }
+
+        private void GetNewUpdate(object sender, System.EventArgs e)
+        {
+            Process.Start("https://github.com/banksio/KeyboardDisplay/releases/latest");
+        }
+
     }
 
 
