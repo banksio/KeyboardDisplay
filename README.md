@@ -9,7 +9,7 @@
 
 A small, simple Windows app to notify when caps lock, num lock or scroll lock are toggled, via a popup in the bottom right corner of the desktop.
 
-This application is currently in alpha: It is not recommended to rely on this program right now, but please feel free to test it and report any bugs found, or new features that may be beneficial!
+This application is currently in beta: There may still be some rough edges, but please feel free to test it and report any bugs found, or new features that may be beneficial!
 ## Install
 ### Prerequisites
 * Windows 7 SP1, Windows 8.1, or Windows 10.
@@ -21,6 +21,12 @@ This application is currently in alpha: It is not recommended to rely on this pr
 ## Usage
 Keyboard display will run in the background (soon to [start on logon](https://github.com/banksio/KeyboardDisplay/issues/7)) and should pop up in the lower right hand corner of the screen whenever caps lock, num lock, or scroll lock are toggled.
 A system tray icon will appear to allow graceful exiting from its context menu.
+## Features
+* Fast and responsive display.
+* Modern design to fit in with Windows 10.
+* Ignores clicks and does not steal focus from the foreground application.
+* Hidden from taskbar.
+* Under 100 MB in size.
 ## Build
 ### Prerequisites
 All above, and;
