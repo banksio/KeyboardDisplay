@@ -12,12 +12,12 @@
             <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimation Duration="00:00:01" Storyboard.TargetProperty="Opacity" To="0.5" />
+            <DoubleAnimation Duration="00:00:00.20" Storyboard.TargetProperty="Opacity" To="0.5" />
         </Storyboard>
         <Storyboard x:Key="FadeOut">
-            <DoubleAnimation Duration="00:00:01" Storyboard.TargetProperty="Opacity" To="0" />
+            <DoubleAnimation Duration="00:00:00.50" Storyboard.TargetProperty="Opacity" To="0" />
             <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:01" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.50" Value="{x:Static Visibility.Hidden}"/>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         <!--<Storyboard x:Key="NumLock">

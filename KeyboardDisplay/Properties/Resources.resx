@@ -122,6 +122,6 @@
     <value>..\Resources\KBDDisp.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="version" xml:space="preserve">
-    <value>0.6</value>
+    <value>0.6.0</value>
   </data>
 </root>

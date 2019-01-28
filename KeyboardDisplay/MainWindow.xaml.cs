@@ -1,9 +1,6 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -11,17 +8,10 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace KeyboardDisplay
@@ -61,14 +51,15 @@ namespace KeyboardDisplay
             CreateNotifyIcon();
             ni.BalloonTipClicked += new EventHandler(GetNewUpdate);
 
-            DispatcherTimer fadeDelay = new DispatcherTimer();
-            fadeDelay.Interval = new TimeSpan(0,0,5);
+            //DispatcherTimer fadeDelay = new DispatcherTimer();
+            //fadeDelay.Interval = new TimeSpan(0,0,5);
 
             _hook = new KeyboardHook();
             _hook.KeyUp += new KeyboardHook.HookEventHandler(OnHookKeyUp);
 
             //check for updates last, it is least important
             GetUpdateInfo();
+
         }
                
         public void CreateNotifyIcon()
@@ -289,10 +280,10 @@ namespace KeyboardDisplay
             // is designed to be used with a monospaced font, such as
             // Lucida Console or Global Monospace.
             var bytes = content.Length;
-            var contentString = Regex.Replace(Encoding.UTF8.GetString(content), @"\t|\n|\r", ""); 
-            
+            var contentString = Regex.Replace(Encoding.UTF8.GetString(content), @"\t|\n|\r", "");
 
-            if (float.Parse(contentString) > float.Parse(Properties.Resources.version))
+
+            if (int.Parse(contentString.Replace(@".", "")) > int.Parse(Properties.Resources.version.Replace(@".", "")))
             {
                 //show update notification
                 Ni.ShowBalloonTip(1, "Keyboard Display Update", "Version "+contentString+" is available. Tap or click here to install it.", ToolTipIcon.Info);

@@ -71,7 +71,7 @@ namespace KeyboardDisplay.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.6.
+        ///   Looks up a localized string similar to 0.6.0.
         /// </summary>
         internal static string version {
             get {
