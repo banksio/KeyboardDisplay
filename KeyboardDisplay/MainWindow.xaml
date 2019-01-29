@@ -12,12 +12,12 @@
             <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimation Duration="00:00:01" Storyboard.TargetProperty="Opacity" To="0.5" />
+            <DoubleAnimation Duration="00:00:00.20" Storyboard.TargetProperty="Opacity" To="0.5" />
         </Storyboard>
         <Storyboard x:Key="FadeOut">
-            <DoubleAnimation Duration="00:00:01" Storyboard.TargetProperty="Opacity" To="0" />
+            <DoubleAnimation Duration="00:00:00.50" Storyboard.TargetProperty="Opacity" To="0" />
             <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:01" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.50" Value="{x:Static Visibility.Hidden}"/>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         <!--<Storyboard x:Key="NumLock">
@@ -34,14 +34,14 @@
     <Grid>
         <Label x:Name="label1" Content="Ready" HorizontalAlignment="Left" Margin="10,20.807,0,0" VerticalAlignment="Top" Foreground="White" FontSize="48" FontFamily="Segoe UI Semilight" Width="165.094" VerticalContentAlignment="Bottom"/>
         <Label x:Name="typeLabel" Content="Caps Lock" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Height="59.24" Width="91.542" FontSize="16" Margin="86.249,10,0,0" HorizontalContentAlignment="Right"/>
-        <tb:TaskbarIcon ToolTipText="Keyboard Display is running." IconSource="Resources\KBDDisp.ico" >
+        <!--<tb:TaskbarIcon ToolTipText="Keyboard Display is running." IconSource="Resources\KBDDisp.ico" >
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Settings" Click="SettingsMenuItem_Click"/>
                     <MenuItem Header="Exit" Click="MenuItem_Click"/>
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
-        </tb:TaskbarIcon>
+        </tb:TaskbarIcon>-->
     </Grid>
 
     <!--<Window.Triggers>

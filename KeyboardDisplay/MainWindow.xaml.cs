@@ -1,23 +1,17 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
-using System.Linq;
+using System.IO;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace KeyboardDisplay
@@ -26,9 +20,11 @@ namespace KeyboardDisplay
     /// Interaction logic for MainWindow.xaml
     /// </summary>
 
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IYourForm
     {
         public bool startUp = true;
+
+        private NotifyIcon ni;
 
         //Disable window focus
         private const int GWL_EXSTYLE = -20;
@@ -45,17 +41,34 @@ namespace KeyboardDisplay
 
         //for detecting keypresses
         private KeyboardHook _hook;
-        
+
+        public NotifyIcon Ni { get => ni; set => ni = value; }
+
         public MainWindow()
         {
             InitializeComponent();
 
-            DispatcherTimer fadeDelay = new DispatcherTimer();
-            fadeDelay.Interval = new TimeSpan(0,0,5);
+            CreateNotifyIcon();
+            Ni.BalloonTipClicked += new EventHandler(Updater.UpdateManager.DoUpdate);
+            Ni.Text = "Keyboard Display is running.";
+
+            //DispatcherTimer fadeDelay = new DispatcherTimer();
+            //fadeDelay.Interval = new TimeSpan(0,0,5);
 
             _hook = new KeyboardHook();
             _hook.KeyUp += new KeyboardHook.HookEventHandler(OnHookKeyUp);
 
+            //check for updates last, it is least important
+            Updater.UpdateManager.GetUpdateInfo();
+
+        }
+               
+        public void CreateNotifyIcon()
+        {
+            Ni = new System.Windows.Forms.NotifyIcon();
+            Ni.Icon = System.Drawing.Icon.ExtractAssociatedIcon(
+                         System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
+            Ni.Visible = true;
         }
 
         void OnHookKeyUp(object sender, HookEventArgs e)
@@ -217,8 +230,18 @@ namespace KeyboardDisplay
             Window1 settings = new Window1();
             settings.Show();
         }
+
+
+
+        public void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon)
+        {
+            Ni.ShowBalloonTip(timeout, tipTitle, tipText, tipIcon);
+        }
     }
 
-
+    interface IYourForm
+    {
+        void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon);
+    }
 }
 
