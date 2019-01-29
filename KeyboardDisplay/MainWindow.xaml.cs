@@ -20,7 +20,7 @@ namespace KeyboardDisplay
     /// Interaction logic for MainWindow.xaml
     /// </summary>
 
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IYourForm
     {
         public bool startUp = true;
 
@@ -49,7 +49,8 @@ namespace KeyboardDisplay
             InitializeComponent();
 
             CreateNotifyIcon();
-            ni.BalloonTipClicked += new EventHandler(GetNewUpdate);
+            Ni.BalloonTipClicked += new EventHandler(Updater.UpdateManager.DoUpdate);
+            Ni.Text = "Keyboard Display is running.";
 
             //DispatcherTimer fadeDelay = new DispatcherTimer();
             //fadeDelay.Interval = new TimeSpan(0,0,5);
@@ -58,7 +59,7 @@ namespace KeyboardDisplay
             _hook.KeyUp += new KeyboardHook.HookEventHandler(OnHookKeyUp);
 
             //check for updates last, it is least important
-            GetUpdateInfo();
+            Updater.UpdateManager.GetUpdateInfo();
 
         }
                
@@ -230,73 +231,17 @@ namespace KeyboardDisplay
             settings.Show();
         }
 
-        private void GetUpdateInfo()
+
+
+        public void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon)
         {
-            // Set URL.
-            var url = "https://raw.githubusercontent.com/banksio/KeyboardDisplay/master/versions.txt";
-
-            var total = 0;
-            // GetURLContents returns the contents of url as a byte array.
-            byte[] urlContents = GetURLContents(url);
-
-            ProcessURLResponse(url, urlContents);
-
-
-            // Update the total.
-            total += urlContents.Length;
-
-            // Display the total count for all of the web addresses.
-            //resultsTextBox.Text += $"\r\n\r\nTotal bytes returned:  {total}\r\n";
+            Ni.ShowBalloonTip(timeout, tipTitle, tipText, tipIcon);
         }
-
-        private byte[] GetURLContents(string url)
-        {
-            // The downloaded resource ends up in the variable named content.
-            var content = new MemoryStream();
-
-            // Initialize an HttpWebRequest for the current URL.
-            var webReq = (HttpWebRequest)WebRequest.Create(url);
-
-            // Send the request to the Internet resource and wait for
-            // the response.
-            // Note: you can't use HttpWebRequest.GetResponse in a Windows Store app.
-            using (WebResponse response = webReq.GetResponse())
-            {
-                // Get the data stream that is associated with the specified URL.
-                using (Stream responseStream = response.GetResponseStream())
-                {
-                    // Read the bytes in responseStream and copy them to content.
-                    responseStream.CopyTo(content);
-                }
-            }
-
-            // Return the result as a byte array.
-            return content.ToArray();
-        }
-
-        private void ProcessURLResponse(string url, byte[] content)
-        {
-            // Display the length of each website. The string format
-            // is designed to be used with a monospaced font, such as
-            // Lucida Console or Global Monospace.
-            var bytes = content.Length;
-            var contentString = Regex.Replace(Encoding.UTF8.GetString(content), @"\t|\n|\r", "");
-
-
-            if (int.Parse(contentString.Replace(@".", "")) > int.Parse(Properties.Resources.version.Replace(@".", "")))
-            {
-                //show update notification
-                Ni.ShowBalloonTip(1, "Keyboard Display Update", "Version "+contentString+" is available. Tap or click here to install it.", ToolTipIcon.Info);
-            }
-        }
-
-        private void GetNewUpdate(object sender, System.EventArgs e)
-        {
-            Process.Start("https://github.com/banksio/KeyboardDisplay/releases/latest");
-        }
-
     }
 
-
+    interface IYourForm
+    {
+        void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon);
+    }
 }
 
