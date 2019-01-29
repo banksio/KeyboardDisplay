@@ -1,1 +1,2 @@
 0.7.0
+https://github.com/banksio/KeyboardDisplay/releases/download/v0.6-beta/KeyboardDisplay-beta-v0.6.zip
