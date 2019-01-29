@@ -26,7 +26,7 @@ namespace KeyboardDisplay
 
             private static string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             private static string savepath = Path.Combine(path, "KbdDisp\\Temp");
-            private static string filepath = Path.Combine(savepath, "update.zip");
+            private static string filepath = Path.Combine(savepath, "updateSetup.exe");
             private static string version;
 
             public static bool UpdateAvailable
