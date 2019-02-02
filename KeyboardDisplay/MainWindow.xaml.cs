@@ -24,7 +24,7 @@ namespace KeyboardDisplay
     {
         public bool startUp = true;
 
-        private NotifyIcon ni;
+        private NotifyIcon _ni;
 
         //Disable window focus
         private const int GWL_EXSTYLE = -20;
@@ -41,17 +41,16 @@ namespace KeyboardDisplay
 
         //for detecting keypresses
         private KeyboardHook _hook;
+        private ContextMenu NiCM;
 
-        public NotifyIcon Ni { get => ni; set => ni = value; }
+        public NotifyIcon MainNI { get => _ni; set => _ni = value; }
 
         public MainWindow()
         {
             InitializeComponent();
 
             CreateNotifyIcon();
-            Ni.BalloonTipClicked += new EventHandler(Updater.UpdateManager.DoUpdate);
-            Ni.Text = "Keyboard Display is running.";
-
+            System.Windows.MessageBox.Show("oof");
             //DispatcherTimer fadeDelay = new DispatcherTimer();
             //fadeDelay.Interval = new TimeSpan(0,0,5);
 
@@ -65,10 +64,16 @@ namespace KeyboardDisplay
                
         public void CreateNotifyIcon()
         {
-            Ni = new System.Windows.Forms.NotifyIcon();
-            Ni.Icon = System.Drawing.Icon.ExtractAssociatedIcon(
+            MainNI = new System.Windows.Forms.NotifyIcon();
+            MainNI.Icon = System.Drawing.Icon.ExtractAssociatedIcon(
                          System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
-            Ni.Visible = true;
+            MainNI.Visible = true;
+            NiCM = new ContextMenu();
+            NiCM.MenuItems.Add("Settings", new EventHandler(SettingsMenuItem_Click));
+            NiCM.MenuItems.Add("Exit", new EventHandler(MenuItem_Click));
+            MainNI.ContextMenu = NiCM;
+            MainNI.BalloonTipClicked += new EventHandler(Updater.UpdateManager.DoUpdate);
+            MainNI.Text = "Keyboard Display is running.";
         }
 
         void OnHookKeyUp(object sender, HookEventArgs e)
@@ -220,12 +225,13 @@ namespace KeyboardDisplay
             startUp = false;
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_Click(object sender, System.EventArgs e)
         {
+            MainNI.Dispose();
             System.Windows.Application.Current.Shutdown();
         }
 
-        private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
+        private void SettingsMenuItem_Click(object sender, System.EventArgs e)
         {
             Window1 settings = new Window1();
             settings.Show();
@@ -235,7 +241,7 @@ namespace KeyboardDisplay
 
         public void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon)
         {
-            Ni.ShowBalloonTip(timeout, tipTitle, tipText, tipIcon);
+            MainNI.ShowBalloonTip(timeout, tipTitle, tipText, tipIcon);
         }
     }
 

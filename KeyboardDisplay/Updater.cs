@@ -18,10 +18,10 @@ namespace KeyboardDisplay
     class Updater
     {
 
-        public static class UpdateManager
+        public class UpdateManager
         {
             private static bool _updateAvailable;
-            private static readonly WebClient wc;
+            private static WebClient wc;
             private static readonly IYourForm obj;
 
             private static string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -35,9 +35,8 @@ namespace KeyboardDisplay
                 set => _updateAvailable = value;
             }
 
-            static UpdateManager()
+            public UpdateManager()
             {
-                obj = new MainWindow();
                 wc = new WebClient();
                 wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
                 UpdateAvailable = false;
@@ -53,7 +52,6 @@ namespace KeyboardDisplay
                 byte[] urlContents = GetURLContents(url);
 
                 ProcessURLResponse(url, urlContents);
-
 
                 // Update the total.
                 total += urlContents.Length;
@@ -128,7 +126,7 @@ namespace KeyboardDisplay
                             }
                             else
                             {
-                                NotifyUpdate();
+                                NotifyUpdate(obj);
                                 return;
                             }
                         }
@@ -164,7 +162,7 @@ namespace KeyboardDisplay
                 Application.Current.Shutdown();
             }
 
-            private static void NotifyUpdate()
+            private static void NotifyUpdate(IYourForm obj)
             {
                 obj.ShowBalloonTip(1, "Keyboard Display Update", "Version " + version + " has been downloaded. Tap or click here to install it.", ToolTipIcon.Info);
             }
@@ -172,7 +170,7 @@ namespace KeyboardDisplay
             private static void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
             {
                 //if (!e.Cancelled || e.Error != null) return;
-                NotifyUpdate();
+                NotifyUpdate(obj);
                 
             }
 
