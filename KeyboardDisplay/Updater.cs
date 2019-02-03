@@ -15,19 +15,18 @@ using MessageBox = System.Windows.MessageBox;
 
 namespace KeyboardDisplay
 {
-    class Updater
-    {
-
         public class UpdateManager
         {
             private static bool _updateAvailable;
             private static WebClient wc;
-            private static readonly IYourForm obj;
+            //private static readonly IYourForm1 interf = new MainWindow();
 
-            private static string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            private static string savepath = Path.Combine(path, "KbdDisp\\Temp");
+            private static string path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            private static string savepath = Path.Combine(path, "Keyboard Display\\Temp");
             private static string filepath = Path.Combine(savepath, "updateSetup.exe");
             private static string version;
+            private static NotifyIcon MainNI;
+            private static ContextMenu NiCM;
 
             public static bool UpdateAvailable
             {
@@ -37,12 +36,39 @@ namespace KeyboardDisplay
 
             public UpdateManager()
             {
+                CreateNotifyIcon();
                 wc = new WebClient();
                 wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
                 UpdateAvailable = false;
             }
 
-            public static void GetUpdateInfo()
+            public void CreateNotifyIcon()
+            {
+                MainNI = new System.Windows.Forms.NotifyIcon();
+                MainNI.Icon = System.Drawing.Icon.ExtractAssociatedIcon(
+                             System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
+                MainNI.Visible = true;
+                NiCM = new ContextMenu();
+                NiCM.MenuItems.Add("Settings", new EventHandler(SettingsMenuItem_Click));
+                NiCM.MenuItems.Add("Exit", new EventHandler(MenuItem_Click));
+                MainNI.ContextMenu = NiCM;
+                MainNI.BalloonTipClicked += new EventHandler(DoUpdate);
+                MainNI.Text = "Keyboard Display is running.";
+            }
+
+            private void MenuItem_Click(object sender, System.EventArgs e)
+            {
+                MainNI.Dispose();
+                System.Windows.Application.Current.Shutdown();
+            }
+
+            private void SettingsMenuItem_Click(object sender, System.EventArgs e)
+            {
+                Window1 settings = new Window1();
+                settings.Show();
+            }
+
+            public void GetUpdateInfo()
             {
                 // Set URL.
                 var url = "https://raw.githubusercontent.com/banksio/KeyboardDisplay/master/versions.txt";
@@ -126,7 +152,7 @@ namespace KeyboardDisplay
                             }
                             else
                             {
-                                NotifyUpdate(obj);
+                                NotifyUpdate();
                                 return;
                             }
                         }
@@ -149,7 +175,7 @@ namespace KeyboardDisplay
                 }
             }
 
-            public static void DoUpdate(object sender, System.EventArgs e)
+            private void DoUpdate(object sender, System.EventArgs e)
             {
                 try
                 {
@@ -162,19 +188,17 @@ namespace KeyboardDisplay
                 Application.Current.Shutdown();
             }
 
-            private static void NotifyUpdate(IYourForm obj)
+            static void NotifyUpdate()
             {
-                obj.ShowBalloonTip(1, "Keyboard Display Update", "Version " + version + " has been downloaded. Tap or click here to install it.", ToolTipIcon.Info);
+                MainNI.ShowBalloonTip(1, "Keyboard Display Update", "Version " + version + " has been downloaded. Tap or click here to install it.", ToolTipIcon.Info);
             }
 
-            private static void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+            private void Wc_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
             {
                 //if (!e.Cancelled || e.Error != null) return;
-                NotifyUpdate(obj);
+                NotifyUpdate();
                 
             }
 
         }
-
-    }
 }
