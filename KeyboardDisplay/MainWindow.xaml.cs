@@ -20,12 +20,10 @@ namespace KeyboardDisplay
     /// Interaction logic for MainWindow.xaml
     /// </summary>
 
-    public partial class MainWindow : Window, IYourForm
+    public partial class MainWindow : Window
     {
         public bool startUp = true;
-
-        private NotifyIcon ni;
-
+        UpdateManager updater = new UpdateManager();
         //Disable window focus
         private const int GWL_EXSTYLE = -20;
         private const int WS_EX_NOACTIVATE = 0x08000000;
@@ -42,16 +40,10 @@ namespace KeyboardDisplay
         //for detecting keypresses
         private KeyboardHook _hook;
 
-        public NotifyIcon Ni { get => ni; set => ni = value; }
-
         public MainWindow()
         {
             InitializeComponent();
-
-            CreateNotifyIcon();
-            Ni.BalloonTipClicked += new EventHandler(Updater.UpdateManager.DoUpdate);
-            Ni.Text = "Keyboard Display is running.";
-
+            
             //DispatcherTimer fadeDelay = new DispatcherTimer();
             //fadeDelay.Interval = new TimeSpan(0,0,5);
 
@@ -59,16 +51,8 @@ namespace KeyboardDisplay
             _hook.KeyUp += new KeyboardHook.HookEventHandler(OnHookKeyUp);
 
             //check for updates last, it is least important
-            Updater.UpdateManager.GetUpdateInfo();
+            updater.GetUpdateInfo();
 
-        }
-               
-        public void CreateNotifyIcon()
-        {
-            Ni = new System.Windows.Forms.NotifyIcon();
-            Ni.Icon = System.Drawing.Icon.ExtractAssociatedIcon(
-                         System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
-            Ni.Visible = true;
         }
 
         void OnHookKeyUp(object sender, HookEventArgs e)
@@ -219,29 +203,6 @@ namespace KeyboardDisplay
             this.Top = desktopWorkingArea.Bottom - this.Height;
             startUp = false;
         }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Application.Current.Shutdown();
-        }
-
-        private void SettingsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Window1 settings = new Window1();
-            settings.Show();
-        }
-
-
-
-        public void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon)
-        {
-            Ni.ShowBalloonTip(timeout, tipTitle, tipText, tipIcon);
-        }
-    }
-
-    interface IYourForm
-    {
-        void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon);
     }
 }
 

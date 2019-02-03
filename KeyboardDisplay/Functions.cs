@@ -132,6 +132,7 @@ namespace KeyboardDisplay
                 catch (Exception e)
                 {
                     // AAAAAAAAAAARGH, an error!
+                    MessageBox.Show(e.Message);
                     return false;
                 }
             }
