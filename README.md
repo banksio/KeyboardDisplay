@@ -1,32 +1,35 @@
 # Keyboard Display
 [![AppVeyor](https://img.shields.io/appveyor/ci/banksio/KeyboardDisplay.svg)](https://ci.appveyor.com/project/banksio/keyboarddisplay)
 [![AppVeyor tests](https://img.shields.io/appveyor/tests/banksio/KeyboardDisplay.svg)](https://ci.appveyor.com/project/banksio/keyboarddisplay/build/tests)
-[![GitHub issues](https://img.shields.io/github/issues/banksio/KeyboardDisplay.svg)](https://github.com/banksio/KeyboardDisplay/issues)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/banksio/KeyboardDisplay.svg?style=flat)
 [![GitHub (pre-)release](https://img.shields.io/github/release/banksio/KeyboardDisplay/all.svg)](https://github.com/banksio/KeyboardDisplay/releases/latest)
-[![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/banksio/KeyboardDisplay.svg)](https://github.com/banksio/KeyboardDisplay/releases/latest)
-[![GitHub last commit](https://img.shields.io/github/last-commit/banksio/KeyboardDisplay.svg)](https://github.com/banksio/KeyboardDisplay/commits)
-[![GitHub license](https://img.shields.io/github/license/banksio/KeyboardDisplay.svg)](https://github.com/banksio/KeyboardDisplay)
+![GitHub All Releases](https://img.shields.io/github/downloads/banksio/KeyboardDisplay/total.svg?style=flat)
 
 A small, simple Windows app to notify when caps lock, num lock or scroll lock are toggled, via a popup in the bottom right corner of the desktop.
 
 This application is currently in beta: There may still be some rough edges, but please feel free to test it and report any bugs found, or new features that may be beneficial!
+## Features
+* Fast and responsive.
+* Modern design to fit Windows 10.
+* Ignores clicks and does not steal focus from the foreground application.
+* Hidden from taskbar.
+* Under 1 MB in size.
 ## Install
 ### Prerequisites
 * Windows 7 SP1, Windows 8.1, or Windows 10.
 * Microsoft .NET Framework 4.7.2 (included with Windows 10 v1803 and later).
 ### Run
-1. Download the [latest release](https://github.com/banksio/KeyboardDisplay/releases/latest).
-2. Extract the zip folder.
-3. Run the executable! (Installer [coming soon](https://github.com/banksio/KeyboardDisplay/issues/6).)
+1. Download the setup application from the [latest release](https://github.com/banksio/KeyboardDisplay/releases/latest).
+2. Run the setup and follow the instructions to install Keyboard Display.
+3. Enjoy!
+
+If you'd rather not install Keyboard Display, you can always grab the portable zip file to try it out. Just head to the releases page, download and extract the zip, and run the executable.
 ## Usage
-Keyboard display will run in the background (soon to [start on logon](https://github.com/banksio/KeyboardDisplay/issues/7)) and should pop up in the lower right hand corner of the screen whenever caps lock, num lock, or scroll lock are toggled.
+Keyboard display will run in the background (starting on logon if specified during installation) and should pop up in the lower right hand corner of the screen whenever caps lock, num lock, or scroll lock are toggled.
 A system tray icon will appear to allow graceful exiting from its context menu.
-## Features
-* Fast and responsive display.
-* Modern design to fit in with Windows 10.
-* Ignores clicks and does not steal focus from the foreground application.
-* Hidden from taskbar.
-* Under 100 MB in size.
+
+**If it doesn't work, please [submit a bug](https://github.com/banksio/KeyboardDisplay/issues).**
+
 ## Build
 ### Prerequisites
 All above, and;
