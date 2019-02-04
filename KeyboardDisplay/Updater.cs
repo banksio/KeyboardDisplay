@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using Application = System.Windows.Application;
@@ -15,7 +12,7 @@ using MessageBox = System.Windows.MessageBox;
 
 namespace KeyboardDisplay
 {
-        public class UpdateManager
+    public class UpdateManager
         {
             private static bool _updateAvailable;
             private static WebClient wc;
@@ -25,6 +22,7 @@ namespace KeyboardDisplay
             private static string savepath = Path.Combine(path, "Keyboard Display\\Temp");
             private static string filepath = Path.Combine(savepath, "updateSetup.exe");
             private static string version;
+
             private static NotifyIcon MainNI;
             private static ContextMenu NiCM;
 
@@ -42,24 +40,23 @@ namespace KeyboardDisplay
                 UpdateAvailable = false;
             }
 
-            public void CreateNotifyIcon()
-            {
-                MainNI = new System.Windows.Forms.NotifyIcon();
-                MainNI.Icon = System.Drawing.Icon.ExtractAssociatedIcon(
-                             System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
-                MainNI.Visible = true;
-                NiCM = new ContextMenu();
-                NiCM.MenuItems.Add("Settings", new EventHandler(SettingsMenuItem_Click));
-                NiCM.MenuItems.Add("Exit", new EventHandler(MenuItem_Click));
-                MainNI.ContextMenu = NiCM;
-                MainNI.BalloonTipClicked += new EventHandler(DoUpdate);
-                MainNI.Text = "Keyboard Display is running.";
-            }
+        public void CreateNotifyIcon()
+        {
+            MainNI = new System.Windows.Forms.NotifyIcon();
+            MainNI.Icon = Properties.Resources.KBDDisp;
+            MainNI.Visible = true;
+            NiCM = new ContextMenu();
+            NiCM.MenuItems.Add("Settings", new EventHandler(SettingsMenuItem_Click));
+            NiCM.MenuItems.Add("Exit", new EventHandler(MenuItem_Click));
+            MainNI.ContextMenu = NiCM;
+            MainNI.BalloonTipClicked += new EventHandler(DoUpdate);
+            MainNI.Text = "Keyboard Display is running.";
+        }
 
-            private void MenuItem_Click(object sender, System.EventArgs e)
+        private void MenuItem_Click(object sender, System.EventArgs e)
             {
                 MainNI.Dispose();
-                System.Windows.Application.Current.Shutdown();
+                Application.Current.Shutdown();
             }
 
             private void SettingsMenuItem_Click(object sender, System.EventArgs e)

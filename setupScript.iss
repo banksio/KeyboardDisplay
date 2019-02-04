@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Keyboard Display"
-#define MyAppVersion "0.7.0"
+#define MyAppVersion "0.7.1"
 #define MyAppPublisher "Nathan Banks"
 #define MyAppURL "https://www.github.com/banksio/KeyboardDisplay"
 #define MyAppExeName "KeyboardDisplay.exe"
