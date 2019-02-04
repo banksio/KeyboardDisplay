@@ -23,7 +23,7 @@ namespace KeyboardDisplay
     public partial class MainWindow : Window
     {
         public bool startUp = true;
-        UpdateManager updater = new UpdateManager();
+        UpdateManager updater;
         //Disable window focus
         private const int GWL_EXSTYLE = -20;
         private const int WS_EX_NOACTIVATE = 0x08000000;
@@ -51,6 +51,7 @@ namespace KeyboardDisplay
             _hook.KeyUp += new KeyboardHook.HookEventHandler(OnHookKeyUp);
 
             //check for updates last, it is least important
+            updater = new UpdateManager();
             updater.GetUpdateInfo();
 
         }
