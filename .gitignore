@@ -320,3 +320,6 @@ __pycache__/
 
 
 # End of https://www.gitignore.io/api/windows,visualstudio
+
+#Inno Setup Output
+Output/
