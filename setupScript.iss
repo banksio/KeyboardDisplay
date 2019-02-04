@@ -23,7 +23,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-OutputBaseFilename=KeyboardDisplay-beta-{#MyAppVersion}
+OutputBaseFilename=Setup-KeyboardDisplay-beta-{#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
 DisableWelcomePage=no
@@ -59,7 +59,7 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 
 [UninstallDelete]
 Type: dirifempty; Name: "{app}"
-Type: filesandordirs; Name: "{commonappdata}"
+Type: filesandordirs; Name: "{commonappdata}\Keyboard Display"
 
 [Code]
 function IsDotNetDetected(version: string; service: cardinal): boolean;
