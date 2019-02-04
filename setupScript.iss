@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Keyboard Display"
-#define MyAppVersion "0.6"
+#define MyAppVersion "0.7.0"
 #define MyAppPublisher "Nathan Banks"
 #define MyAppURL "https://www.github.com/banksio/KeyboardDisplay"
 #define MyAppExeName "KeyboardDisplay.exe"
@@ -23,9 +23,11 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-OutputBaseFilename=setup
+OutputBaseFilename=KeyboardDisplay-beta-{#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
+DisableWelcomePage=no
+CloseApplications=yes
 UninstallDisplayIcon={app}\{#MyAppExeName}
 
 [Tasks]
@@ -38,9 +40,6 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
 Source: "F:\Development\GitHub\originals\KeyboardDisplay\KeyboardDisplay\bin\Release\KeyboardDisplay.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "F:\Development\GitHub\originals\KeyboardDisplay\KeyboardDisplay\bin\Release\Hardcodet.Wpf.TaskbarNotification.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "F:\Development\GitHub\originals\KeyboardDisplay\KeyboardDisplay\bin\Release\Hardcodet.Wpf.TaskbarNotification.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "F:\Development\GitHub\originals\KeyboardDisplay\KeyboardDisplay\bin\Release\Hardcodet.Wpf.TaskbarNotification.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Development\GitHub\originals\KeyboardDisplay\KeyboardDisplay\bin\Release\KeyboardDisplay.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Development\GitHub\originals\KeyboardDisplay\KeyboardDisplay\bin\Release\KeyboardDisplay.pdb"; DestDir: "{app}"; Flags: ignoreversion
 ; Temp files
@@ -60,6 +59,7 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 
 [UninstallDelete]
 Type: dirifempty; Name: "{app}"
+Type: filesandordirs; Name: "{commonappdata}"
 
 [Code]
 function IsDotNetDetected(version: string; service: cardinal): boolean;
@@ -151,4 +151,5 @@ begin
         result := false;
     end else
         result := true;
+    MsgBox('If you are updating Keyboard Display, please ensure it is not running on any other user accounts on this computer.', mbError, MB_OK);
 end;
