@@ -1,9 +1,5 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KeyboardDisplay
@@ -12,25 +8,25 @@ namespace KeyboardDisplay
     {
         public static string StartupRegistryKeyName = "KbdDispStart";
 
-        public static string TypeLabelText(string type)
+        public static string TypeLabelText(Keys type)
         {
             switch (type)
             {
-                case "CapsLock":
+                case Keys.CapsLock:
                     return "Caps Lock";
-                case "NumLock":
+                case Keys.NumLock:
                     return "Num Lock";
-                case "ScrLock":
+                case Keys.Scroll:
                     return "Scroll Lock";
                 default:
                     return "Unknown";
             }
         }
 
-        public static bool ChangeStoredLock(string type, bool locked)
+        public static bool ChangeStoredLock(Keys type, bool locked)
         {
             switch (type) {
-                case "CapsLock":
+                case Keys.CapsLock:
                     if (locked)
                     {
                         CapsLock.prevstate = CapsLock.curstate;
@@ -47,7 +43,7 @@ namespace KeyboardDisplay
                     {
                         return false;
                     }
-                case "NumLock":
+                case Keys.NumLock:
                     if (locked)
                     {
                         NumLock.prevstate = NumLock.curstate;
@@ -66,7 +62,7 @@ namespace KeyboardDisplay
                     {
                         return false;
                     }
-                case "ScrLock":
+                case Keys.Scroll:
                     if (locked)
                     {
                         ScrLock.prevstate = ScrLock.curstate;
@@ -131,7 +127,7 @@ namespace KeyboardDisplay
                 }
                 catch (Exception e)
                 {
-                    // AAAAAAAAAAARGH, an error!
+                    //error occured, show messagebox
                     MessageBox.Show(e.Message);
                     return false;
                 }

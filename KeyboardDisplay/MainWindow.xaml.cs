@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +7,6 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
-using System.Windows.Threading;
 
 namespace KeyboardDisplay
 {
@@ -65,66 +59,56 @@ namespace KeyboardDisplay
         {
             if (Keyboard.IsKeyToggled(Key.CapsLock))
             {
-                if (Functions.ChangeStoredLock("CapsLock",true))
+                if (Functions.ChangeStoredLock(Keys.CapsLock, true))
                 {
                     label1.Content = "On";
-                    typeLabel.Content = Functions.TypeLabelText("CapsLock");
+                    typeLabel.Content = Functions.TypeLabelText(Keys.CapsLock);
                     ChangeDisplay();
                 }
             }
             else if (!(Keyboard.IsKeyToggled(Key.CapsLock)))
             {
-                if (Functions.ChangeStoredLock("CapsLock", false))
+                if (Functions.ChangeStoredLock(Keys.CapsLock, false))
                 {
                     label1.Content = "Off";
-                    typeLabel.Content = Functions.TypeLabelText("CapsLock");
+                    typeLabel.Content = Functions.TypeLabelText(Keys.CapsLock);
                     ChangeDisplay();
                 }
             }
             if (Keyboard.IsKeyToggled(Key.NumLock))
             {
-                //NumLock.prevstate = NumLock.curstate;
-                //NumLock.curstate = "on";
-                if (Functions.ChangeStoredLock("NumLock", true))
+                if (Functions.ChangeStoredLock(Keys.NumLock, true))
                 {
                     label1.Content = "On";
-                    typeLabel.Content = Functions.TypeLabelText("NumLock");
+                    typeLabel.Content = Functions.TypeLabelText(Keys.NumLock);
                     ChangeDisplay();
                 }
             }
             else if (!(Keyboard.IsKeyToggled(Key.NumLock)))
             {
-
-                //NumLock.prevstate = NumLock.curstate;
-                //NumLock.curstate = "off";
-                if (Functions.ChangeStoredLock("NumLock", false))
+                if (Functions.ChangeStoredLock(Keys.NumLock, false))
                 {
                     label1.Content = "Off";
-                    typeLabel.Content = Functions.TypeLabelText("NumLock");
+                    typeLabel.Content = Functions.TypeLabelText(Keys.NumLock);
                     ChangeDisplay();
                 }
 
             }
             if (Keyboard.IsKeyToggled(Key.Scroll))
             {
-                //ScrLock.prevstate = ScrLock.curstate;
-                //ScrLock.curstate = "on";
-                if (Functions.ChangeStoredLock("ScrLock", true))
+                if (Functions.ChangeStoredLock(Keys.Scroll, true))
                 {
                     label1.Content = "On";
-                    typeLabel.Content = Functions.TypeLabelText("ScrLock");
+                    typeLabel.Content = Functions.TypeLabelText(Keys.Scroll);
                     ChangeDisplay();
                 }
             }
             else if (!(Keyboard.IsKeyToggled(Key.Scroll)))
             {
-
-                //ScrLock.prevstate = ScrLock.curstate;
-                //ScrLock.curstate = "off";
-                if (Functions.ChangeStoredLock("ScrLock", false))
+                if (Functions.ChangeStoredLock(Keys.Scroll, false))
                 {
                     label1.Content = "Off";
-                    typeLabel.Content = Functions.TypeLabelText("ScrLock");
+                    typeLabel.Content = Functions.TypeLabelText(Keys.Scroll);
                     ChangeDisplay();
                     
                 }
@@ -199,9 +183,9 @@ namespace KeyboardDisplay
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             checkKeyLocks();
-            var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
-            this.Left = desktopWorkingArea.Right - this.Width;
-            this.Top = desktopWorkingArea.Bottom - this.Height;
+            var desktopWorkingArea = SystemParameters.WorkArea;
+            Left = desktopWorkingArea.Right - Width;
+            Top = desktopWorkingArea.Bottom - Height;
             startUp = false;
         }
     }
