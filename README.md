@@ -1,11 +1,11 @@
 # Keyboard Display
-[![AppVeyor](https://img.shields.io/appveyor/ci/banksio/KeyboardDisplay.svg)](https://ci.appveyor.com/project/banksio/keyboarddisplay)
-[![AppVeyor tests](https://img.shields.io/appveyor/tests/banksio/KeyboardDisplay.svg)](https://ci.appveyor.com/project/banksio/keyboarddisplay/build/tests)
+[![Azure DevOps builds](https://img.shields.io/azure-devops/build/banksio/2d41c925-8f20-4136-87aa-f6236634c677/4.svg?style=flat)](https://banksio.visualstudio.com/KeyboardDisplay/_build?definitionId=4)
+[![Azure DevOps tests](https://img.shields.io/azure-devops/tests/banksio/2d41c925-8f20-4136-87aa-f6236634c677/4.svg?style=flat)](https://banksio.visualstudio.com/KeyboardDisplay/_build?definitionId=4)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/banksio/KeyboardDisplay.svg?style=flat)
 [![GitHub (pre-)release](https://img.shields.io/github/release/banksio/KeyboardDisplay/all.svg)](https://github.com/banksio/KeyboardDisplay/releases/latest)
 ![GitHub All Releases](https://img.shields.io/github/downloads/banksio/KeyboardDisplay/total.svg?style=flat)
 
-A small, simple Windows app to notify when caps lock, num lock or scroll lock are toggled, via a popup in the bottom right corner of the desktop.
+A small, simple Windows app to notify when caps lock, num lock or scroll lock are toggled, via a popup in the bottom right corner of the desktop. Useful if your keyboard doesn't have lock indicators.
 
 This application is currently in beta: There may still be some rough edges, but please feel free to test it and report any bugs found, or new features that may be beneficial!
 ## Features
