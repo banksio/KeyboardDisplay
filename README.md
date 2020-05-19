@@ -1,6 +1,6 @@
 # Keyboard Display
-[![Azure DevOps builds](https://img.shields.io/azure-devops/build/banksio/2d41c925-8f20-4136-87aa-f6236634c677/4.svg?style=flat)](https://banksio.visualstudio.com/KeyboardDisplay/_build?definitionId=4)
-[![Azure DevOps tests](https://img.shields.io/azure-devops/tests/banksio/2d41c925-8f20-4136-87aa-f6236634c677/4.svg?style=flat)](https://banksio.visualstudio.com/KeyboardDisplay/_build?definitionId=4)
+[![Azure DevOps builds](https://img.shields.io/azure-devops/build/banksio/2d41c925-8f20-4136-87aa-f6236634c677/7.svg?style=flat)](https://banksio.visualstudio.com/KeyboardDisplay/_build?definitionId=7)
+[![Azure DevOps tests](https://img.shields.io/azure-devops/tests/banksio/2d41c925-8f20-4136-87aa-f6236634c677/7.svg?style=flat)](https://banksio.visualstudio.com/KeyboardDisplay/_build?definitionId=7)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/banksio/KeyboardDisplay.svg?style=flat)
 [![GitHub (pre-)release](https://img.shields.io/github/release/banksio/KeyboardDisplay/all.svg)](https://github.com/banksio/KeyboardDisplay/releases/latest)
 ![GitHub All Releases](https://img.shields.io/github/downloads/banksio/KeyboardDisplay/total.svg?style=flat)
