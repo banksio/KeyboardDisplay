@@ -7,6 +7,9 @@
 
 A small, simple Windows app to notify when caps lock, num lock or scroll lock are toggled, via a popup in the bottom right corner of the desktop. Useful if your keyboard doesn't have lock indicators.
 
+![Main overlay](https://i.imgur.com/Y7zet1L.png)
+![Settings window](https://i.imgur.com/Yz2OBji.png)
+
 This application is currently in beta: There may still be some rough edges, but please feel free to test it and report any bugs found, or new features that may be beneficial!
 ## Features
 * Fast and responsive.
